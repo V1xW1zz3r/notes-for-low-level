@@ -11,7 +11,7 @@ const
 int main(){
 	float num1 = 2;
 	num1 = 3;
-	printf("%f", num1)
+	printf("%f", num1);
 
 	return 0;
 } result would be 3
@@ -19,7 +19,7 @@ int main(){
 int main(){
 	const float num1 = 2;
 	num1 = 3;
-	printf("%f", num1)
+	printf("%f", num1);
 
 	return 0;
 } result would be an error
