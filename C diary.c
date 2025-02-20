@@ -230,3 +230,53 @@ int main(){
 
     return 0;
 }
+//small calculator program
+//just some string and switch case
+int main(){
+    char operator;
+    double fnum;
+    double snum;
+    double result;
+
+    printf("\nInsert a operator for only (+, -, /, *, ^)");
+    scanf("%c", &operator);
+    printf("\nInsert first number:");
+    scanf("%lf", &fnum);
+    printf("\nInsert second number:");
+    scanf("%lf", &snum);
+    
+
+    switch (operator)
+    {
+    case '+':
+        result = fnum + snum;
+        printf("\nThe result will be:%.2lf", result);
+        break; //for plus
+
+    case '-':
+        result = fnum - snum;
+        printf("\nThe result will be:%.2lf", result);
+        break; //for subtract
+
+    case '/':
+        result = fnum / snum;
+        printf("\nThe result will be:%.2lf", result);
+        break; //for divide
+
+    case '*':
+        result = fnum * snum;
+        printf("\nThe result will be:%.2lf", result);
+        break; //for mutiply
+
+    case '^':
+        result = pow(fnum, snum);
+        printf("\nThe result will be:%.2lf", result);
+        break; //the power of
+
+    default:
+        printf("\nError, please insert again.");
+        break;
+    } 
+
+    return 0;
+}
