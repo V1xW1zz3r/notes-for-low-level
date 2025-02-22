@@ -280,3 +280,21 @@ int main(){
 
     return 0;
 }
+//(AND(&&), OR(||), NOT(!)) logical operators
+int main(){
+    float temp; //the temperature
+    _Bool notsunny = 1; //means not sunny for 1 is true for not sunny and 0 for it's sunny
+    printf("\nhow's the temperature out there?");
+    scanf("%f", &temp);
+
+    if ((temp >= 15 || temp <= 40) && !notsunny) //with bool you don't need to specifize the verable (notsunny == 1)
+    { //now we have if temp is greater than 15 OR less than 40 AND if it is NOT NOT sunny than return false
+      //if notsunny was 1(true = there's no sun) then return to the else one which is false for !(NOT) logic statement
+        printf("\nThe weather is great.");
+    }
+    else
+    {
+        printf("\nthe weather is not great.");
+    }
+    return 0;
+}
