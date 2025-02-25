@@ -296,5 +296,43 @@ int main(){
     {
         printf("\nthe weather is not great.");
     }
+//function
+//where the code is executed
+//the default will be:
+int main()
+{
+    return 0;
+}
+//you can reuse the function by using:
+void reuse() {
+    printf("I'm just a 2019 guy\n");
+    printf("2019!\n");
+    printf("2019!\n");
+    printf("2019!\n");
+}
+
+int main() {
+    reuse();
+    reuse();
+    reuse();
+    return 0;
+}
+//for getting fancy you can add value in main reuse()
+//in the () you can type numbers which add a value
+void reuse(int times) {                 // Added an integer parameter for (reuse) named 'times'
+    for (int i = 0; i < times; i++) {   // Loop 'times' by calling the main reuse int                                              
+        printf("I'm just a 2019 guy\n");
+        printf("2019!\n");
+        printf("2019!\n");
+        printf("2019!\n");
+    }
+}
+
+int main() {
+    reuse(1);     // Call reuse and pass the value 1
+    reuse(2);     // Call reuse and pass the value 2
+    reuse(3);     // Call reuse and pass the value 3
+    return 0;     // Called the total of 6 times but you can just use one number to decide in one parameter
+}
     return 0;
 }
