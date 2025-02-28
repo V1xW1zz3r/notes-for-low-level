@@ -336,3 +336,22 @@ int main() {
 }
     return 0;
 }
+//arguments
+//functions can't cross sessions to make it
+//but using arguments can pass the varables to the void one
+void reuse(char name[], int year) //need matching parameters for the main one #REQUIRED TO WORK
+{
+        printf("I'm just a %d %s\n", year, name);
+        printf("%d!\n", year);
+        printf("%d!\n", year);
+        printf("%d!\n", year);
+
+}
+
+int main() {
+    char name[] = "guy";
+    int year = 2019;
+    reuse(name, year); //specify the variables to work
+
+    return 0;     
+}
