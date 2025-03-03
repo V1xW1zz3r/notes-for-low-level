@@ -389,3 +389,18 @@ int main()
     printf("the result will be:%.2lf\n", result); 
     return 0;     //0 means if the program runs successfully
 }
+//tenary operator
+//the simplified version of if/else statement
+//structure: (condition) ? value if true :(or) value if false
+int findMax(int x, int y) 
+{       
+    return (x > y) ? x : y; //simplified if/else statement
+}
+
+int main() 
+{      
+    int max = findMax(9, 4);
+    printf("Find the maximum:%d\n", max);
+
+    return 0;
+}
