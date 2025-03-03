@@ -355,3 +355,37 @@ int main() {
 
     return 0;     
 }
+//return statement
+//returns a value back to a calling function
+int square(int x) //the default 'void' should change to the functions like int, double, char, etc. 
+{
+    //int result = x * x;
+    //return result;        
+    return x * x;           //this will also work, just to keep it simple
+}
+
+int main() 
+{
+    int x =square(4);
+    printf("the result will be:%d", x); //the result will be 16 after the return
+    return 0;     //0 means if the program runs successfully
+}
+//the further examples
+double multi(double x, double y) //if store 2 variables declare clearly 
+{       
+    return x * y;      
+}
+
+int main() 
+{   
+    double x;   // Declare x without initializing it initially
+    double y;
+    printf("Enter first number\n");
+    scanf("%lf", &x);
+    printf("Enter second number\n");
+    scanf("%lf", &y);
+
+    double result = multi(x, y); //should assign a result data type
+    printf("the result will be:%.2lf\n", result); 
+    return 0;     //0 means if the program runs successfully
+}
