@@ -421,3 +421,25 @@ void reuse(char name[], int year) //need matching parameters for the main one #R
         printf("I'm just a %d %s\n", year, name);
         printf("%d!\n", year);
 }
+//string functions
+//include <string.h>
+int main()
+{
+    char string1[] = "Cool"
+    char string2[] = "Guy"
+
+    //strlwr(string1);              converts string1 to lowercase -> cool
+    //strupr(string1);              converts to uppercase -> COOL
+    //strcat(string1, string2);     attach the string1 and string2 together -> CoolGuy
+    //strncat(string1, string2, 1); attach n characters from string2 to string1 -> CoolG 
+    //strcpy(string1, string2);     copy string2 to string1 (kinda like replace) -> Guy
+    //strncpy(string1, string2, 2); copy the n characters from string2 to string1 -> Guol
+    //strset(string1, '?');         set all the character to '(a character)' -> ????
+    //strnset(string1, 'a', 1);     set first n characters to string1 and replace it -> aool
+    //strrev(string1);              reverse a string -> looC
+
+    //int result = strlen(string1); 	         return string length as int -> 4
+    //int result = strcmp(string1, string2, n);  compare n characters are the same, if so return 0
+    //int result = strcmpi(string1, string2);    compare all characters (ignore case) -> 1
+    //int result = strncmp(string1, string2, 1); compare n characters (ignore case) -> 1
+}
