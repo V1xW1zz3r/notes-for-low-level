@@ -443,3 +443,14 @@ int main()
     //int result = strcmpi(string1, string2);    compare all characters (ignore case) -> 1
     //int result = strncmp(string1, string2, 1); compare n characters (ignore case) -> 1
 }
+//for loops
+//loop your code like no others
+int main()
+{   
+    for (int i = 1; i <= 10; i+=2) //i+=2 means add 2 each time can also do i--, i-=n, etc.
+    {
+        printf("cool %d\n", i);
+    }
+
+    return 0;     
+}
