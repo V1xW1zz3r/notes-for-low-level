@@ -404,3 +404,20 @@ int main()
 
     return 0;
 }
+//function prototypes
+//define any functions after main fuctions and can check for correction and easier for debuggin
+void reuse(char name[], int year); //function prototype
+
+int main() {
+    char name[] = "guy";
+    int year = 2019;
+    reuse(name, year); //specify the variables to work
+
+    return 0;     
+}
+
+void reuse(char name[], int year) //need matching parameters for the main one #REQUIRED TO WORK
+{
+        printf("I'm just a %d %s\n", year, name);
+        printf("%d!\n", year);
+}
