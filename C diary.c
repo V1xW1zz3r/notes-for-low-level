@@ -454,3 +454,55 @@ int main()
 
     return 0;     
 }
+//do while loop
+//always execute a BLOCK of code ONCE first and check the conditions, basically just layer and layer matches
+int main()
+{   
+    int number = 0;
+    int sum = 0;
+
+    do{ //do the code session once
+        printf("Insert a number\n");
+        scanf("%d", &number);    
+        if (number > 0)
+        {
+            sum += number; //sum = number + sum;
+        }
+
+    }while (number > 0); //this will recheck the code block to see if num > 0, if so DO it
+    printf("sum is: %d\n", sum);
+    return 0;     
+}
+//nested loop a loop inside of another loop
+//weired af doesn't that common
+/*In conclusion: basically when the first i starts it will go to j and
+since j applied a number then it will print it out until it reach the extend
+then now move to new line and go all over the i and j again until i reach the limit
+i=4, now i=1 then immeidately go for j and j do all the things and \n the new line, i=2 and so on
+*/
+int main()
+{   
+    int rows;
+    int cols;
+    char symbol;
+
+    printf("\nEnter number of rows ");
+    scanf("%d", &rows);
+
+    printf("Enter numbers of columns ");
+    scanf("%d", &cols); //after hitting enter we have a new line \n buffer
+
+    printf("Enter a symbol ");
+    scanf(" %c", &symbol); //add a space before %c to skip space
+
+    for (int i = 1; i <= rows; i++)
+    {
+        for (int j = 1; j <= cols; j++)
+        {
+            printf("%c", symbol); //replace the num to a symbol
+        }
+        printf("\n");   
+    }
+
+    return 0;
+}
