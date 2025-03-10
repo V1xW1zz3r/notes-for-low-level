@@ -506,3 +506,112 @@ int main()
 
     return 0;
 }
+//continue statement
+//continue just skip the code
+int main()
+{   
+    for (int i = 0; i >= -10; i--)
+    {
+        if (i == 3, i == -3) //double condition
+        {
+            continue; //skip the matching condition
+        }
+        printf("%d\n", i);
+    }
+    return 0;  
+}
+//arrays
+//array can store many values of the same data type
+int main()
+{      
+    double prices[5]= {4.0, 8.0, 9.0, 20.5, 43.0}; //this is a array, from left to right: 0~4
+    
+    for (int i = 0; i < 5; i++)
+    {
+        if (i >= 5)
+        {
+            printf("oops something went wriong\n");
+            break;
+        }
+        printf("the prices of the cheese%d:%.2lf\n", i, prices[i]); //i for the loop int and prices will call the value
+    }
+
+    return 0;  
+}
+//for loop array and sizeof
+int main()
+{      
+    double prices[]= {4.0, 8.0, 9.0, 20.5, 43.0}; //this is a array, from left to right: 0~4
+    
+    printf("the bytes of the prices are %d\n", sizeof(prices)); 
+    //the sizeof function checks the stored statement in this case double will be 8bytes each
+
+    for (int i = 0; i < sizeof(prices)/sizeof(prices[0]); i++) //use sizeof instead of random numbers for accuracy
+    //we have the full size of the array:40bytes and divid by 8bytes get the number of arrary we assigned: 40/8 == 5
+    {
+        printf("the price of cheese%d:$%.2lf\n", i, prices[i]); //i for the loop int and prices will call the value
+    }
+
+    return 0;  
+}
+//2D array
+//an array, where each element is an entire array - for table, grid or matrix
+int main()
+{      
+    /*int nums[2][3] = //the first[] is like rows and the second[] like columns
+    {
+        {1, 2, 3}, 
+        {4, 5, 6}
+    };              //second bracket assign the maxium siz:3, the first bracket isn't necessary tho
+    */
+
+    //int is 4bytes
+    int nums[2][4]; //[rows][columns] NOTED:it start from 0
+    int rows = sizeof(nums)/sizeof(nums[0]);          //sizeof(nums) total size:2*4*4bytes | sizeof(nums[0]) the size of 1row:4*4
+    int columns = sizeof(nums[0])/sizeof(nums[0][0]); //sizeof(nums[0]) the size of 1row:4*4 | sizeof(nums[0][0]):4 = sizeof(int)
+    printf("%d\n", rows);
+    printf("%d\n", columns);
+
+    nums[0][0] = 1; //start of the first row
+    nums[0][1] = 2; 
+    nums[0][2] = 3;
+    nums[0][3] = 4; //start of the second row
+    nums[1][0] = 5;
+    nums[1][1] = 6;
+    nums[1][2] = 7; //start of the third row
+    nums[1][3] = 8;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            printf("%d ", nums[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+
+//The sizeof calculation in table
+int main() {
+    int nums[3][3];  // A 3x3 array of integers (like a table)
+
+    // Calculate the number of rows:
+    //   Total size of the array / size of one row
+    int rows = sizeof(nums) / sizeof(nums[0]);
+    // sizeof(nums) is the total size of the 3x3 array (36 bytes if int is 4 bytes)
+    // sizeof(nums[0]) is the size of the first row (3 integers = 12 bytes)
+    // So, 36 / 12 = 3 rows
+
+    // Calculate the number of columns:
+    //   Size of one row / size of one element in a row
+    int columns = sizeof(nums[0]) / sizeof(nums[0][0]);
+    // sizeof(nums[0]) is the size of the first row (12 bytes)
+    // sizeof(nums[0][0]) is the size of a single integer (4 bytes)
+    // So, 12 / 4 = 3 columns
+
+    printf("Number of columns: %d\n", columns); // Prints 3
+    printf("Number of rows: %d\n", rows);       // Prints 3
+
+    return 0;
+}
