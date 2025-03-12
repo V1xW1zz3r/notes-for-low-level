@@ -615,3 +615,46 @@ int main() {
 
     return 0;
 }
+//array of strings
+//like 2D array but its string
+int main()
+{   
+    char yname[25];
+    char names[][10]={"Corley", "", "May", "Jason"};
+    //an string array will look like:{ ?, ?, ?, ?, ?, ?, ?, ?, ?, ? } '?' means uninitialized and we have 10 assigned
+    printf("\nEnter your name:");
+    fgets(yname, 25, stdin);     //use this (insert) might contain blank
+    yname[strlen(yname) - 1] = '\0';
+    //use strNcpy instead of strcpy
+    strncpy(names[1], yname, 9); //only use this to change value stored in the array. Copy up to 9 char
+    names[0][9] = '\0'; //a null terminator which assign the 10th one to be '\0' NOTED: it started from 0
+    //also prevents buffer overflow
+
+    for (int i = 0; i < sizeof(names)/sizeof(names[0]); i++)
+    //(Total size of the array in bytes) / (Size of one row in bytes)
+    /* 
+    sizeof(names) would be 40 (4 rows * 10 bytes/row).
+    sizeof(names[0]) would be 10 (10 bytes/row).
+    40 / 10 = 4
+    */
+    {   
+        printf("%s\n", names[i]);
+    }
+    printf("You are on the list!");
+    return 0;  
+}
+//swap values of two variables
+int main()
+{   
+    char x[15] = "Ice";     //int x = 4;
+    char y[15] = "Water";   //int y = 6;
+    char temp[15];          //int temp;
+
+    strcpy(temp, x);        //temp = x; temp='' ->(assign x) temp = 4
+    strcpy(x, y);           //x = y;
+    strcpy(y, temp);        //y = temp;
+
+    printf("%s\n", x);
+    printf("%s\n", y);
+    return 0;  
+}
