@@ -544,7 +544,8 @@ int main_string_funcs_example() { // Renamed main
     printf("strncmp: First 2 chars comparison result (Cool vs Guy) is %d\n", comparison_result_strncmp);
 
     strcpy(string1, "COOL"); // Uppercase version of "Cool"
-    int comparison_result_strcmpi = strcmpi(string1, string2);    // Compares string1 and string2 ignoring case (case-insensitive comparison). (Note: strcmpi is non-standard, use stricmp or _stricmp for Windows, or implement manually for cross-platform).
+    int comparison_result_strcmpi = strcmpi(string1, string2);    /* Compares string1 and string2 ignoring case (case-insensitive comparison).
+								(Note: strcmpi is non-standard, use stricmp or _stricmp for Windows, or implement manually for cross-platform).*/
     printf("strcmpi (non-standard, case-insensitive): Comparison result (COOL vs Guy) is %d\n", comparison_result_strcmpi);
 
 
@@ -640,7 +641,8 @@ int main_array_example() { // Renamed main
             printf("Oops, something went wrong\n");
             break; // 'break' would exit the loop prematurely, but this branch is never reached.
         }
-        printf("The price of cheese %d: $%.2lf\n", i+1, prices[i]); // Print the price of each cheese, using index 'i' to access array elements. Display prices with 2 decimal places. (Note: Changed "cheese%d" to "cheese %d" and added +1 to 'i' for 1-based indexing in output, which is more user-friendly.)
+        printf("The price of cheese %d: $%.2lf\n", i+1, prices[i]); /* Print the price of each cheese, using index 'i' to access array elements. Display prices with 2 decimal places. 
+	(Note: Changed "cheese%d" to "cheese %d" and added +1 to 'i' for 1-based indexing in output, which is more user-friendly.) */
     }
 
     return 0;
