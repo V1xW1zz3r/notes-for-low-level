@@ -1,162 +1,192 @@
-//%d- int, bool
-//%s- string
-//%c- char if the char stores a number or so use %c can turn into ASCII,if do int use %d
-//%f- float, %lf- double(long float) in "scanf" double use %lf, float use %f, otherwize dosent matter
-//%".num" show how many dep you want
-//%(num1)".num2"f, num1 can decide how far the text will be can use also "-num"
+// Format specifiers:
+// %d - int, bool (boolean)
+// %s - string
+// %c - char (character). If the char stores a number or similar, using %c can display the ASCII character. To display the numerical value, use %d.
+// %f - float, %lf - double (long float). In "scanf": for double use %lf, for float use %f. For "printf" it generally doesn't matter.
+// %".num"f -  Specifies decimal precision, showing "num" digits after the decimal point.
+// %(num1)".num2"f -  Field width and precision. "num1" sets the minimum width of the output field (padding with spaces if needed). Use "-num1" for left-alignment.
 
 //-------------------------------
-const
-//add const infront of a var, e.g.(int, float, char) the value can't be altered
+// Constants:
+// Add 'const' in front of a variable declaration (e.g., const int, const float, const char). This makes the variable's value immutable (unchangeable) after initialization.
+
 int main(){
 	float num1 = 2;
 	num1 = 3;
 	printf("%f", num1);
 
 	return 0;
-} result would be 3
+} // Result: 3
 
 int main(){
 	const float num1 = 2;
-	num1 = 3;
+	num1 = 3; // This line will cause a compilation error.
 	printf("%f", num1);
 
 	return 0;
-} result would be an error
+} // Result: Compilation error
 
 //-------------------------------
-//arithmetic operattions
-//add (+)
-//minus (-)
-//mutiply (*)
-//div (/)
-//increment (++) a++; -> 6
-//decrement (--) b--; -> 1
-//modulus (%) remain of divs
+// Arithmetic Operations:
+// Addition (+)
+// Subtraction (-)
+// Multiplication (*)
+// Division (/)
+// Increment (++)  a++; (If 'a' was 5, after a++, 'a' becomes 6)
+// Decrement (--)  b--; (If 'b' was 2, after b--, 'b' becomes 1)
+// Modulus (%) -  Returns the remainder of a division.
 int a = 5;
 int b = 2;
 int c = a % b;
-printf("%d", c); //print 1
-//x = x + 1; equal to x+=1; can use on all arithmetic
+printf("%d", c); // Output: 1 (because 5 divided by 2 has a remainder of 1)
+
+// Shorthand assignment operators:
+// x = x + 1; is equivalent to x += 1;  This shorthand applies to all arithmetic operators.
 int d = 10;
-x = x + 4;
-x+=4;
-x(arugment)=(int)
+d = d + 4; // Equivalent to d += 4;
+d += 4;    // Shorthand for d = d + 4;
+// x (argument) = (int) ...  (This line is unclear and seems incomplete. It's likely referring to type casting, but needs clarification)
 
 //-------------------------------
-//to create a string
-//char name[];
-//char name[] = "name";
-//in the [] can be a number which represents how many bytes that string will use 
-//if it exceeds the byte then it will cause buffer over flow
-//scanf function is to let user to type something
-//scanf("%s", &name);
+// Strings:
+// To create a string:
+// char name[];  (Declaration only, not recommended without initialization or size)
+// char name[] = "name"; (String literal initialization)
+// char name[number]; (Declaration with a fixed size buffer. 'number' represents the maximum number of bytes this string can hold, including the null terminator.)
+// If the input string exceeds the allocated buffer size, it can cause a buffer overflow, which is a security risk.
+// scanf function is used to get input from the user.
+// scanf("%s", name); // Note: No '&' is needed before 'name' when using scanf with a char array, as the array name itself decays to a pointer to the first element.
+
 char cool[] = "Nick";
 char name[10];
-printf("Hi my name is %s, what's your name\n", cool);
-scanf("%s", &name);
-printf("My name is %s", name);
+printf("Hi my name is %s, what's your name?\n", cool);
+scanf("%s", name);
+printf("My name is %s\n", name);
 
-//if the the string contain a space like "Jay Vulgan"
-//then use "fgets" fucntion
-char name[10];
-int c; 
-while ((c = getchar()) != '\n' && c != EOF); //basically you need this to work with fgets
+// Handling strings with spaces:
+// If the string input might contain spaces, like "Jay Vulgan", use the "fgets" function instead of scanf("%s").
+char name_with_space[20]; // Allocate more space for names with spaces
+int clear_buffer_char;
+while ((clear_buffer_char = getchar()) != '\n' && clear_buffer_char != EOF); // Clear input buffer before fgets to prevent issues
 
-fgets(name, 10, stdin);
-name[strlen(name)-1] = '\0'; //use this doesn't create a new line for user input
+fgets(name_with_space, 20, stdin); // Read up to 19 characters (plus null terminator) from standard input into name_with_space.
+name_with_space[strlen(name_with_space)-1] = '\0'; // Remove the trailing newline character that fgets usually includes.
 
 //-------------------------------
-//math functions
-//sqrt = square root
-double A = sqrt(9); -> 3
-//pow = number^num, the power of the number
-double B = pow(3, 4); -> 81
-//round = round decimal
-int C = (3.14); -> 3
-//ceil = round the number up
-int D = ceil(3.14); -> 4
-//floor = round down the number
-int E = floor(3.95); -> 3
-//fabs = make negative to positive
-doulbe F = fabs(-200); -> 200.0000
-//log
-double G = log(3); -> 1.098612
-//sin
-double H = sin(45)
-//cos
-double I = cos(45) 
-//tan
-double J = tan(45) 
+// Math Functions:
+// Include the math library: #include <math.h>
+
+// sqrt = square root
+double A = sqrt(9); // A will be 3.0
+// pow = number raised to a power, i.e., number^power
+double B = pow(3, 4); // B will be 81.0 (3 to the power of 4)
+// round = rounds to the nearest integer
+int C = round(3.14); // C will be 3
+// ceil = rounds the number up to the nearest integer (ceiling)
+int D = ceil(3.14); // D will be 4
+// floor = rounds the number down to the nearest integer (floor)
+int E = floor(3.95); // E will be 3
+// fabs = absolute value (makes negative numbers positive)
+double F = fabs(-200); // F will be 200.0000
+// log (natural logarithm, base e)
+double G = log(3); // G will be approximately 1.098612
+// sin (sine, angle in radians)
+double H = sin(45.0 * M_PI / 180.0); // H will be sin(45 degrees), M_PI is defined in math.h for Pi, convert degrees to radians.
+// cos (cosine, angle in radians)
+double I = cos(45.0 * M_PI / 180.0); // I will be cos(45 degrees)
+// tan (tangent, angle in radians)
+double J = tan(45.0 * M_PI / 180.0); // J will be tan(45 degrees)
+
 //-------------------------------
-//circumference calculation
+// Circumference and Area Calculation of a Circle:
+#include <stdio.h>
+#include <math.h> // Include for M_PI
+
 int main(){
 
-const double PI = 3.14159;
+const double PI = M_PI; // Use M_PI from math.h for more accurate Pi value
 double radius;
 double circumference;
 double area;
 
-printf("\ntype number that you want to calcualte:");
-scanf("%lf", &radius); //cuz we are using double so need to use "%lf"
+printf("\nEnter the radius of the circle: ");
+scanf("%lf", &radius); // %lf for double input
 
 circumference = radius * 2 * PI;
 
-printf("\nthe circumference is: %f", circumference);
+printf("\nThe circumference is: %lf\n", circumference); // Use %lf for printing double
 
 area = radius * radius * PI;
 
-printf("\nand the area of the circle is: %f", area);
+printf("The area of the circle is: %lf\n", area); // Use %lf for printing double
+return 0;
 }
+
 //-------------------------------
-//if statements
-	int c;
+// If Statements:
+#include <stdio.h>
+#include <string.h> // Include for string functions
+
+int main(){
+	int clear_buffer_char;
     int age;
     char name[25] ="";
     char answer[25] ="";
 
-    printf("\nHey just checking up, what's your age?");
+    printf("\nHey, just checking up. What's your age? ");
     scanf("%d", &age);
-	printf("\nHow do I call ya?");
-    while ((c = getchar()) != '\n' && c != EOF); //with fgets if you want to display the blanks
+	printf("\nHow may I address you? ");
+    while ((clear_buffer_char = getchar()) != '\n' && clear_buffer_char != EOF); // Clear input buffer before fgets
     fgets(name, 25, stdin);
+    name[strcspn(name, "\n")] = 0; // Remove trailing newline
+
 	printf("Hello %s", name);
 
-	if (age >= 20) //if you are comparing value and wants to be the same as the value use "==" so if(age == 18){}
+	if (age >= 20) // Comparison: greater than or equal to 20
 	{
-    /* code */
+    /* Code to execute if age is 20 or older */
+        printf("\nYou are an adult.");
 	}
-	else if(){//you can do mutiple "else if" funcitons before to else
-	//you can check other statements before to else
+	else if (age < 20 && age >= 13) // You can have multiple "else if" conditions before the final "else"
+	{
+	// Code to execute if age is between 13 and 19 (teenager)
+        printf("\nYou are a teenager.");
 	}
 	else{
-	/*code do sthing else*/
+	/* Code to execute if none of the above conditions are true (age is less than 13) */
+        printf("\nYou are a child.");
 	}
 	return 0;
-//-------------------------------
-//switch statements
-//basically better than else if
-//**noted that you need to add ":" after each cases and breaks**
-float GPA;
-    printf("\nHow well you do in this semester? Insert range from 1.0-4.0:");
-    scanf("%f", &GPA);
-    
-    int int_GPA = (int)(GPA * 10); 
+}
 
-    switch(int_GPA){ //can store only chars, ints use if-else for "double" like statements
-        case 40: //case can store char also but you need to add '' like case 'A'
+//-------------------------------
+// Switch Statements:
+// Switch statements are often clearer than long if-else if chains, especially when checking for equality against multiple constant values.
+// **Note:** Add ":" after each 'case' label and 'break;' to prevent fall-through to the next case.
+
+#include <stdio.h>
+
+int main(){
+float GPA;
+    printf("\nHow well did you do this semester? Enter GPA from 1.0-4.0: ");
+    scanf("%f", &GPA);
+
+    int int_GPA = (int)(GPA * 10); // Scale GPA by 10 to use integers in switch case
+
+    switch(int_GPA){ // Switch statements work with integer types (char, int, etc.), not directly with floating-point numbers like 'double' or 'float' for ranges. Use if-else for ranges with doubles/floats if needed.
+        case 40: // Cases can also be characters, e.g., case 'A': (needs single quotes)
         case 39:
         case 38:
         case 37:
         case 36:
         case 35:
         case 34:
-        printf("\nWow really impressive %.1f!", GPA);
-    break; //break is needed or otherwize it will continue to execute the next case
+        printf("\nWow, really impressive %.1f!", GPA);
+    break; // 'break' is essential to exit the switch after a case is matched. Without 'break', execution will "fall through" to the next case.
     	case 33:
     	case 32:
-    	case 30:
-        printf("\nThat's alright keep going");
+    	case 30: // Note: Case 31 is missing.
+        printf("\nThat's alright, keep going.");
     break;
     	case 29:
     	case 28:
@@ -180,147 +210,181 @@ float GPA;
     	case 12:
     	case 11:
     	case 10:
-        printf("\nWow really impressive, YOU FAILED!");
-    break;     
-    default: //this one is for whatever not align with the cases and it will do whatever thing down there
-        printf("Invailed answer, please insert again");
+        printf("\nWow, really impressive... YOU FAILED!");
+    break;
+    default: // 'default' case handles any value that doesn't match any of the 'case' labels.
+        printf("Invalid input, please enter a GPA between 1.0 and 4.0.");
     }
-//yoda notation - coding return
-//the ret will return to see if the value is the same as int
-//let's say the int in the if is 30 and if the input is 30 then it will compile the code in if statement
-//should always put the num after the return function and add "==" or ">=" or "<="
-//note that it's reversed, so it's better to use "==" equal to
-    int ret = somefunc();
-    scanf("%d", &somefunc);
+    return 0;
+}
 
-    if (30 == ret){
-        printf("I wrote code like Yoda");
+// Yoda Notation (Condition on the Left):
+// In Yoda notation, the constant value is placed on the left side of the comparison operator.
+// Some programmers use this style to prevent accidental assignment (e.g., if (ret = 30) instead of if (ret == 30)).
+// However, it can be less readable for some.
+
+int somefunc() {
+    return 30; // Example function returning 30
+}
+
+int main() {
+    int ret = somefunc();
+    //scanf("%d", &somefunc); // scanf is for reading input, not for function names. This line is incorrect and should be removed.
+
+    if (30 == ret){ // Yoda notation: Comparing if 'ret' is equal to 30.
+        printf("I wrote code like Yoda!");
     }
-//temperature conversion
-//idk why include ctype tho
-#include <ctype.h>
+    return 0;
+}
+
+// Temperature Conversion Program:
+#include <stdio.h>
+#include <ctype.h> // Include for toupper() function (character type functions)
 
 int main(){
     char unit;
     float temp;
 
-    printf("\nTemp converter, insert (C) or (F)");
+    printf("\nTemperature converter. Enter unit (C) for Celsius or (F) for Fahrenheit: ");
     scanf("%c", &unit);
 
-    unit = toupper(unit); //make the message upper
+    unit = toupper(unit); // Convert the input unit to uppercase for case-insensitive comparison.
 
-    if (unit == 'C') //if char to char need use ('char')
+    if (unit == 'C') // Compare character with a character literal using single quotes ('C').
     {
-        printf("\nWhat's the Temperature around there?");
-        scanf("\n%f", &temp);
-        float ansF = (temp * 9/5) + 32;     //formula basically 
-        printf("\nconvert to (F) will be %.3fF", ansF);
+        printf("\nEnter the temperature in Celsius: ");
+        scanf("%f", &temp);
+        float ansF = (temp * 9.0/5.0) + 32.0;     // Formula for Celsius to Fahrenheit. Use floating-point numbers (e.g., 9.0, 5.0, 32.0) for accurate calculations.
+        printf("\nTemperature in Fahrenheit: %.3fF\n", ansF); // Display result with 3 decimal places.
     }
     else if (unit == 'F')
     {
-        printf("\nInsert (F) temp to convert");
-        scanf("\n%f", &temp);
-        float ansC = ((temp - 32) * 5) / 9; //formula basically 
-        printf("\nconvert to (C) will be %.3fC", ansC);
+        printf("\nEnter the temperature in Fahrenheit: ");
+        scanf("%f", &temp);
+        float ansC = ((temp - 32.0) * 5.0) / 9.0; // Formula for Fahrenheit to Celsius
+        printf("\nTemperature in Celsius: %.3fC\n", ansC); // Display result with 3 decimal places.
     }
     else
     {
-       printf("\nplease enter again");
+       printf("\nInvalid input. Please enter 'C' or 'F'.\n");
     }
 
     return 0;
 }
-//small calculator program
-//just some string and switch case
+
+// Small Calculator Program:
+#include <stdio.h>
+#include <stdlib.h> // For exit() function if needed
+#include <math.h>   // For pow() function
+
 int main(){
     char operator;
     double fnum;
     double snum;
     double result;
 
-    printf("\nInsert a operator for only (+, -, /, *, ^)");
-    scanf("%c", &operator);
-    printf("\nInsert first number:");
+    printf("\nEnter an operator (+, -, /, *, ^): ");
+    scanf(" %c", &operator); // Space before %c to consume any leading whitespace (like newline from previous input).
+    printf("\nEnter the first number: ");
     scanf("%lf", &fnum);
-    printf("\nInsert second number:");
+    printf("\nEnter the second number: ");
     scanf("%lf", &snum);
-    
+
 
     switch (operator)
     {
     case '+':
         result = fnum + snum;
-        printf("\nThe result will be:%.2lf", result);
-        break; //for plus
+        printf("\nThe result is: %.2lf\n", result); // Display result with 2 decimal places.
+        break; // For addition
 
     case '-':
         result = fnum - snum;
-        printf("\nThe result will be:%.2lf", result);
-        break; //for subtract
+        printf("\nThe result is: %.2lf\n", result); // For subtraction
+        break;
 
     case '/':
+        if (snum == 0) {
+            printf("\nError: Division by zero!\n");
+            // Consider exiting the program or handling the error differently
+            // exit(1); // Example of exiting with an error code
+            break;
+        }
         result = fnum / snum;
-        printf("\nThe result will be:%.2lf", result);
-        break; //for divide
+        printf("\nThe result is: %.2lf\n", result); // For division
+        break;
 
     case '*':
         result = fnum * snum;
-        printf("\nThe result will be:%.2lf", result);
-        break; //for mutiply
+        printf("\nThe result is: %.2lf\n", result); // For multiplication
+        break;
 
     case '^':
-        result = pow(fnum, snum);
-        printf("\nThe result will be:%.2lf", result);
-        break; //the power of
+        result = pow(fnum, snum); // Use pow() for exponentiation
+        printf("\nThe result is: %.2lf\n", result); // For exponentiation
+        break;
 
     default:
-        printf("\nError, please insert again.");
+        printf("\nError: Invalid operator. Please enter +, -, /, *, or ^.\n");
         break;
-    } 
+    }
 
     return 0;
 }
-//(AND(&&), OR(||), NOT(!)) logical operators
+
+// Logical Operators (AND (&&), OR (||), NOT (!)):
+#include <stdio.h>
+#include <stdbool.h> // Include for boolean type '_Bool' or 'bool' (if supported)
+
 int main(){
-    float temp; //the temperature
-    _Bool notsunny = 1; //means not sunny for 1 is true for not sunny and 0 for it's sunny
-    printf("\nhow's the temperature out there?");
+    float temp; // Temperature
+    bool notsunny = true; // 'bool' is more readable than '_Bool', and requires stdbool.h. Initialize to 'true' meaning it's not sunny.
+
+    printf("\nWhat's the temperature outside? ");
     scanf("%f", &temp);
 
-    if ((temp >= 15 || temp <= 40) && !notsunny) //with bool you don't need to specifize the verable (notsunny == 1)
-    { //now we have if temp is greater than 15 OR less than 40 AND if it is NOT NOT sunny than return false
-      //if notsunny was 1(true = there's no sun) then return to the else one which is false for !(NOT) logic statement
-        printf("\nThe weather is great.");
+    if ((temp >= 15 && temp <= 40) || !notsunny) // Condition: (temperature between 15 and 40 degrees Celsius inclusive) OR (it IS sunny)
+    { // '!' is the NOT operator. '!notsunny' is true if 'notsunny' is false (meaning it IS sunny).
+      // Original comment was confusing about "NOT NOT sunny".  It's simply "NOT notsunny" which means "is sunny".
+        printf("\nThe weather is great.\n");
     }
     else
     {
-        printf("\nthe weather is not great.");
+        printf("\nThe weather is not great.\n");
     }
-//function
-//where the code is executed
-//the default will be:
-int main()
-{
     return 0;
 }
-//you can reuse the function by using:
-void reuse() {
+
+// Functions:
+// Functions are blocks of reusable code.
+// The 'main' function is the entry point of every C program.
+
+// Default main function structure:
+int main()
+{
+    return 0; // 0 indicates successful program execution.
+}
+
+// Example of a simple reusable function:
+void reuse() { // 'void' return type means the function doesn't return any value.
     printf("I'm just a 2019 guy\n");
     printf("2019!\n");
     printf("2019!\n");
     printf("2019!\n");
 }
 
-int main() {
-    reuse();
+int main_reuse_example() { // Renamed main to avoid conflict with other main functions in this file.
+    reuse(); // Calling the 'reuse' function.
     reuse();
     reuse();
     return 0;
 }
-//for getting fancy you can add value in main reuse()
-//in the () you can type numbers which add a value
-void reuse(int times) {                 // Added an integer parameter for (reuse) named 'times'
-    for (int i = 0; i < times; i++) {   // Loop 'times' by calling the main reuse int                                              
+
+// Functions with parameters (arguments):
+// To make functions more flexible, you can pass values to them as arguments.
+
+void reuse_with_times(int times) {                 // Added an integer parameter 'times' to the 'reuse_with_times' function.
+    for (int i = 0; i < times; i++) {   // Loop 'times' number of times.
         printf("I'm just a 2019 guy\n");
         printf("2019!\n");
         printf("2019!\n");
@@ -328,18 +392,18 @@ void reuse(int times) {                 // Added an integer parameter for (reuse
     }
 }
 
-int main() {
-    reuse(1);     // Call reuse and pass the value 1
-    reuse(2);     // Call reuse and pass the value 2
-    reuse(3);     // Call reuse and pass the value 3
-    return 0;     // Called the total of 6 times but you can just use one number to decide in one parameter
+int main_reuse_times_example() { // Renamed main
+    reuse_with_times(1);     // Call 'reuse_with_times' and pass the value 1 as the 'times' argument.
+    reuse_with_times(2);     // Call 'reuse_with_times' and pass the value 2.
+    reuse_with_times(3);     // Call 'reuse_with_times' and pass the value 3.
+    return 0;     // The 'reuse_with_times' function is called a total of 6 times across these three calls, based on the sum of arguments (1+2+3).
 }
-    return 0;
-}
-//arguments
-//functions can't cross sessions to make it
-//but using arguments can pass the varables to the void one
-void reuse(char name[], int year) //need matching parameters for the main one #REQUIRED TO WORK
+
+// Arguments (Parameters):
+// Arguments allow you to pass variables or values into functions, making them more versatile.
+// Variables declared inside a function have local scope and are not directly accessible outside the function, unless passed as arguments or returned.
+
+void reuse_with_name_year(char name[], int year) // Function now takes a char array 'name' and an integer 'year' as parameters.
 {
         printf("I'm just a %d %s\n", year, name);
         printf("%d!\n", year);
@@ -348,251 +412,301 @@ void reuse(char name[], int year) //need matching parameters for the main one #R
 
 }
 
-int main() {
+int main_reuse_args_example() { // Renamed main
     char name[] = "guy";
     int year = 2019;
-    reuse(name, year); //specify the variables to work
+    reuse_with_name_year(name, year); // Pass the 'name' array and 'year' integer as arguments to the 'reuse_with_name_year' function.
 
-    return 0;     
+    return 0;
 }
-//return statement
-//returns a value back to a calling function
-int square(int x) //the default 'void' should change to the functions like int, double, char, etc. 
+
+// Return Statement:
+// 'return' statement is used to send a value back from a function to the calling code.
+// Functions can return values of various data types (int, double, char, etc.). 'void' return type means no value is returned.
+
+int square(int x) // Function 'square' now has a return type of 'int', indicating it will return an integer value.
 {
     //int result = x * x;
-    //return result;        
-    return x * x;           //this will also work, just to keep it simple
+    //return result;
+    return x * x;           // Calculate and return the square of 'x'. This is a more concise way to do the same as the commented-out lines.
 }
 
-int main() 
+int main_return_example() { // Renamed main
+    int x = square(4); // Call 'square' with argument 4. The returned value (16) is assigned to 'x'.
+    printf("The result is: %d\n", x); // Output: The result is: 16
+    return 0;     // 0 indicates successful program execution.
+}
+
+// Further Examples of Return Values:
+double multiply(double x, double y) // Function 'multiply' returns a 'double' value (product of two doubles).
 {
-    int x =square(4);
-    printf("the result will be:%d", x); //the result will be 16 after the return
-    return 0;     //0 means if the program runs successfully
-}
-//the further examples
-double multi(double x, double y) //if store 2 variables declare clearly 
-{       
-    return x * y;      
+    return x * y;
 }
 
-int main() 
-{   
-    double x;   // Declare x without initializing it initially
+int main_multiply_example() { // Renamed main
+    double x;   // Declare 'x' and 'y' as doubles.
     double y;
-    printf("Enter first number\n");
+    printf("Enter the first number: ");
     scanf("%lf", &x);
-    printf("Enter second number\n");
+    printf("Enter the second number: ");
     scanf("%lf", &y);
 
-    double result = multi(x, y); //should assign a result data type
-    printf("the result will be:%.2lf\n", result); 
-    return 0;     //0 means if the program runs successfully
-}
-//tenary operator
-//the simplified version of if/else statement
-//structure: (condition) ? value if true :(or) value if false
-int findMax(int x, int y) 
-{       
-    return (x > y) ? x : y; //simplified if/else statement
+    double result = multiply(x, y); // Call 'multiply' and store the returned product in the 'result' variable.
+    printf("The result is: %.2lf\n", result); // Display the result with 2 decimal places.
+    return 0;     // 0 for success.
 }
 
-int main() 
-{      
-    int max = findMax(9, 4);
-    printf("Find the maximum:%d\n", max);
+// Ternary Operator:
+// A concise way to write simple if-else statements in a single line.
+// Structure: (condition) ? value_if_true : value_if_false
+
+int findMax(int x, int y)
+{
+    return (x > y) ? x : y; // If 'x > y' is true, return 'x'; otherwise, return 'y'.
+}
+
+int main_ternary_example() { // Renamed main
+    int max = findMax(9, 4); // Call 'findMax' to get the maximum of 9 and 4.
+    printf("The maximum is: %d\n", max); // Output: The maximum is: 9
 
     return 0;
 }
-//function prototypes
-//define any functions after main fuctions and can check for correction and easier for debuggin
-void reuse(char name[], int year); //function prototype
 
-int main() {
+// Function Prototypes:
+// Function prototypes declare a function before it is defined, telling the compiler about the function's name, return type, and parameters.
+// This allows you to call a function before its full definition appears in the code, and helps with compiler error checking.
+
+void reuse_prototype(char name[], int year); // Function prototype declaration for 'reuse_prototype'.
+
+int main_prototype_example() { // Renamed main
     char name[] = "guy";
     int year = 2019;
-    reuse(name, year); //specify the variables to work
+    reuse_prototype(name, year); // Call 'reuse_prototype'.
 
-    return 0;     
+    return 0;
 }
 
-void reuse(char name[], int year) //need matching parameters for the main one #REQUIRED TO WORK
+void reuse_prototype(char name[], int year) // Function definition (implementation) comes after 'main'.
 {
         printf("I'm just a %d %s\n", year, name);
         printf("%d!\n", year);
 }
-//string functions
-//include <string.h>
-int main()
-{
-    char string1[] = "Cool"
-    char string2[] = "Guy"
 
-    //strlwr(string1);              converts string1 to lowercase -> cool
-    //strupr(string1);              converts to uppercase -> COOL
-    //strcat(string1, string2);     attach the string1 and string2 together -> CoolGuy
-    //strncat(string1, string2, 1); attach n characters from string2 to string1 -> CoolG 
-    //strcpy(string1, string2);     copy string2 to string1 (kinda like replace) -> Guy
-    //strncpy(string1, string2, 2); copy the n characters from string2 to string1 -> Guol
-    //strset(string1, '?');         set all the character to '(a character)' -> ????
-    //strnset(string1, 'a', 1);     set first n characters to string1 and replace it -> aool
-    //strrev(string1);              reverse a string -> looC
+// String Functions:
+// To use string functions, include the string library: #include <string.h>
+#include <string.h>
+#include <stdio.h> // For printf
 
-    //int result = strlen(string1); 	         return string length as int -> 4
-    //int result = strcmp(string1, string2, n);  compare n characters are the same, if so return 0
-    //int result = strcmpi(string1, string2);    compare all characters (ignore case) -> 1
-    //int result = strncmp(string1, string2, 1); compare n characters (ignore case) -> 1
+int main_string_funcs_example() { // Renamed main
+    char string1[] = "Cool";
+    char string2[] = "Guy";
+    char string3[50]; // Buffer for string operations
+
+    // String manipulation functions (examples):
+    // strlwr(string1);              // Converts string1 to lowercase (Note: strlwr is not standard C, consider using tolower in a loop for portability).
+    // strupr(string1);              // Converts string1 to uppercase (Note: strupr is also non-standard, use toupper in a loop).
+    strcpy(string3, string1);       // Copies string1 to string3.
+    strcat(string3, string2);      // Appends string2 to the end of string3 (string3 now contains "CoolGuy").
+    printf("strcat: %s\n", string3);
+
+    strcpy(string3, string1);
+    strncat(string3, string2, 1);  // Appends the first '1' character from string2 to string3 (string3 now contains "CoolG").
+    printf("strncat: %s\n", string3);
+
+    strcpy(string1, string2);      // Copies string2 to string1 (string1 now contains "Guy").
+    printf("strcpy: string1 is now \"%s\"\n", string1);
+
+    strncpy(string1, "Original", 2); // Copies the first '2' characters from "Original" to string1 (string1 now contains "Or" + rest of previous string).
+    printf("strncpy: string1 is now \"%s\"\n", string1);
+
+    strcpy(string1, "Cool"); // Reset string1 for next example
+    strset(string1, '?');         // Sets all characters in string1 to '?' (string1 now contains "????"). (Note: strset is non-standard).
+    printf("strset (non-standard): string1 is now \"%s\"\n", string1);
+
+    strcpy(string1, "Cool"); // Reset string1
+    strnset(string1, 'a', 1);     // Sets the first '1' character in string1 to 'a' (string1 now contains "aool"). (Note: strnset is also non-standard).
+    printf("strnset (non-standard): string1 is now \"%s\"\n", string1);
+
+    strcpy(string1, "Cool"); // Reset string1
+    strrev(string1);              // Reverses string1 (string1 now contains "looC"). (Note: strrev is non-standard).
+    printf("strrev (non-standard): string1 is now \"%s\"\n", string1);
+
+    strcpy(string1, "Cool"); // Reset string1
+
+    // String information functions:
+    int length = strlen(string1); 	         // Returns the length of string1 (excluding the null terminator).
+    printf("strlen: Length of string1 is %d\n", length);
+
+    int comparison_result_strcmp = strcmp(string1, string2);  // Compares string1 and string2 lexicographically. Returns 0 if equal, negative if string1 comes before string2, positive if string1 comes after.
+    printf("strcmp: Comparison result (Cool vs Guy) is %d\n", comparison_result_strcmp);
+
+    int comparison_result_strncmp = strncmp(string1, string2, 2); // Compares the first '2' characters of string1 and string2.
+    printf("strncmp: First 2 chars comparison result (Cool vs Guy) is %d\n", comparison_result_strncmp);
+
+    strcpy(string1, "COOL"); // Uppercase version of "Cool"
+    int comparison_result_strcmpi = strcmpi(string1, string2);    // Compares string1 and string2 ignoring case (case-insensitive comparison). (Note: strcmpi is non-standard, use stricmp or _stricmp for Windows, or implement manually for cross-platform).
+    printf("strcmpi (non-standard, case-insensitive): Comparison result (COOL vs Guy) is %d\n", comparison_result_strcmpi);
+
+
+    return 0;
 }
-//for loops
-//loop your code like no others
-int main()
-{   
-    for (int i = 1; i <= 10; i+=2) //i+=2 means add 2 each time can also do i--, i-=n, etc.
+
+// For Loops:
+// For loops are used to repeatedly execute a block of code a specific number of times.
+
+int main_for_loop_example() { // Renamed main
+    for (int i = 1; i <= 10; i+=2) // Loop initialization: i=1; condition: i<=10; increment: i+=2 (i increases by 2 in each iteration).
     {
-        printf("cool %d\n", i);
+        printf("cool %d\n", i); // This will print "cool" followed by the value of 'i' in each iteration (1, 3, 5, 7, 9).
     }
 
-    return 0;     
+    return 0;
 }
-//do while loop
-//always execute a BLOCK of code ONCE first and check the conditions, basically just layer and layer matches
-int main()
-{   
+
+// Do-While Loop:
+// A do-while loop is similar to a while loop, but it guarantees that the loop body executes at least once before checking the loop condition.
+
+int main_do_while_example() { // Renamed main
     int number = 0;
     int sum = 0;
 
-    do{ //do the code session once
-        printf("Insert a number\n");
-        scanf("%d", &number);    
+    do{ // The code block inside 'do' will execute at least once.
+        printf("Enter a positive number (or non-positive to stop): ");
+        scanf("%d", &number);
         if (number > 0)
         {
-            sum += number; //sum = number + sum;
+            sum += number; // Add the positive number to the 'sum'.
         }
 
-    }while (number > 0); //this will recheck the code block to see if num > 0, if so DO it
-    printf("sum is: %d\n", sum);
-    return 0;     
+    }while (number > 0); // The loop continues as long as 'number' is greater than 0.
+    printf("Sum of positive numbers entered: %d\n", sum);
+    return 0;
 }
-//nested loop a loop inside of another loop
-//weired af doesn't that common
-/*In conclusion: basically when the first i starts it will go to j and
-since j applied a number then it will print it out until it reach the extend
-then now move to new line and go all over the i and j again until i reach the limit
-i=4, now i=1 then immeidately go for j and j do all the things and \n the new line, i=2 and so on
-*/
-int main()
-{   
+
+// Nested Loops: A loop inside another loop.
+// Nested loops are often used for processing 2D data structures like matrices or grids.
+
+int main_nested_loop_example() { // Renamed main
     int rows;
     int cols;
     char symbol;
 
-    printf("\nEnter number of rows ");
+    printf("\nEnter number of rows: ");
     scanf("%d", &rows);
 
-    printf("Enter numbers of columns ");
-    scanf("%d", &cols); //after hitting enter we have a new line \n buffer
+    printf("Enter number of columns: ");
+    scanf("%d", &cols); // After hitting enter in scanf, a newline character ('\n') is left in the input buffer.
 
-    printf("Enter a symbol ");
-    scanf(" %c", &symbol); //add a space before %c to skip space
+    printf("Enter a symbol to use: ");
+    scanf(" %c", &symbol); // Add a space before %c in scanf format string to consume any leading whitespace (including the newline from previous input).
 
-    for (int i = 1; i <= rows; i++)
+    for (int i = 1; i <= rows; i++) // Outer loop iterates through rows.
     {
-        for (int j = 1; j <= cols; j++)
+        for (int j = 1; j <= cols; j++) // Inner loop iterates through columns for each row.
         {
-            printf("%c", symbol); //replace the num to a symbol
+            printf("%c", symbol); // Print the specified 'symbol' for each column in the current row.
         }
-        printf("\n");   
+        printf("\n");   // After printing all columns in a row, move to the next line to start a new row.
     }
 
     return 0;
 }
-//continue statement
-//continue just skip the code
-int main()
-{   
-    for (int i = 0; i >= -10; i--)
+
+// Continue Statement:
+// The 'continue' statement skips the rest of the current iteration of a loop and proceeds to the next iteration.
+
+int main_continue_example() { // Renamed main
+    for (int i = 0; i >= -10; i--) // Loop from 0 down to -10.
     {
-        if (i == 3, i == -3) //double condition
+        if (i == 0 || i == -3) // Check for multiple conditions using OR operator '||'. Original comment used comma ',' which is incorrect here.
         {
-            continue; //skip the matching condition
+            continue; // If 'i' is 0 or -3, skip the rest of the current iteration and go to the next value of 'i'.
         }
-        printf("%d\n", i);
+        printf("%d\n", i); // Print 'i' unless it's 0 or -3.
     }
-    return 0;  
+    return 0;
 }
-//arrays
-//array can store many values of the same data type
-int main()
-{      
-    double prices[5]= {4.0, 8.0, 9.0, 20.5, 43.0}; //this is a array, from left to right: 0~4
-    
-    for (int i = 0; i < 5; i++)
+
+// Arrays:
+// Arrays are used to store collections of elements of the same data type in contiguous memory locations.
+
+int main_array_example() { // Renamed main
+    double prices[5]= {4.0, 8.0, 9.0, 20.5, 43.0}; // Declare and initialize an array 'prices' of 5 doubles. Array indices are from 0 to 4.
+
+    for (int i = 0; i < 5; i++) // Loop through the array elements using an index 'i' from 0 to 4.
     {
-        if (i >= 5)
+        if (i >= 5) // This condition will never be true inside the loop as 'i' is controlled to be less than 5. This check is redundant and can be removed.
         {
-            printf("oops something went wriong\n");
-            break;
+            printf("Oops, something went wrong\n");
+            break; // 'break' would exit the loop prematurely, but this branch is never reached.
         }
-        printf("the prices of the cheese%d:%.2lf\n", i, prices[i]); //i for the loop int and prices will call the value
+        printf("The price of cheese %d: $%.2lf\n", i+1, prices[i]); // Print the price of each cheese, using index 'i' to access array elements. Display prices with 2 decimal places. (Note: Changed "cheese%d" to "cheese %d" and added +1 to 'i' for 1-based indexing in output, which is more user-friendly.)
     }
 
-    return 0;  
+    return 0;
 }
-//for loop array and sizeof
-int main()
-{      
-    double prices[]= {4.0, 8.0, 9.0, 20.5, 43.0}; //this is a array, from left to right: 0~4
-    
-    printf("the bytes of the prices are %d\n", sizeof(prices)); 
-    //the sizeof function checks the stored statement in this case double will be 8bytes each
 
-    for (int i = 0; i < sizeof(prices)/sizeof(prices[0]); i++) //use sizeof instead of random numbers for accuracy
-    //we have the full size of the array:40bytes and divid by 8bytes get the number of arrary we assigned: 40/8 == 5
+// For Loop with Array and Sizeof Operator:
+#include <stdio.h>
+
+int main_sizeof_array_example() { // Renamed main
+    double prices[]= {4.0, 8.0, 9.0, 20.5, 43.0}; // Array size is automatically determined by the number of initializers.
+
+    printf("The size (in bytes) of the 'prices' array is: %zu\n", sizeof(prices)); // 'sizeof(prices)' gives the total size of the array in bytes. Use %zu for size_t type.
+    // 'sizeof' operator returns the size of a variable or data type in bytes. For 'double', it's typically 8 bytes.
+
+    for (int i = 0; i < sizeof(prices)/sizeof(prices[0]); i++) // Calculate the number of elements in the array dynamically using 'sizeof'.
+    // sizeof(prices) - total size of array, sizeof(prices[0]) - size of one element (double). Division gives number of elements.
     {
-        printf("the price of cheese%d:$%.2lf\n", i, prices[i]); //i for the loop int and prices will call the value
+        printf("The price of cheese %d: $%.2lf\n", i+1, prices[i]); // Print prices, similar to previous example.
     }
 
-    return 0;  
+    return 0;
 }
-//2D array
-//an array, where each element is an entire array - for table, grid or matrix
-int main()
-{      
-    /*int nums[2][3] = //the first[] is like rows and the second[] like columns
+
+// 2D Arrays (Multidimensional Arrays):
+// A 2D array is an array of arrays, often used to represent tables, grids, or matrices.
+
+int main_2d_array_example() { // Renamed main
+    /*int nums[2][3] = // The first dimension is like rows, the second dimension is like columns.
     {
-        {1, 2, 3}, 
+        {1, 2, 3},
         {4, 5, 6}
-    };              //second bracket assign the maxium siz:3, the first bracket isn't necessary tho
+    };              // Second bracket specifies the maximum size of columns: 3. The first bracket (rows) size is optional if initialized.
     */
 
-    //int is 4bytes
-    int nums[2][4]; //[rows][columns] NOTED:it start from 0
-    int rows = sizeof(nums)/sizeof(nums[0]);          //sizeof(nums) total size:2*4*4bytes | sizeof(nums[0]) the size of 1row:4*4
-    int columns = sizeof(nums[0])/sizeof(nums[0][0]); //sizeof(nums[0]) the size of 1row:4*4 | sizeof(nums[0][0]):4 = sizeof(int)
-    printf("%d\n", rows);
-    printf("%d\n", columns);
+    // 'int' typically occupies 4 bytes.
+    int nums[2][4]; // Declare a 2D array 'nums' with 2 rows and 4 columns. Indices start from 0 (nums[0][0] is the first element).
+    int rows = sizeof(nums)/sizeof(nums[0]);          // Calculate the number of rows: Total size of 'nums' divided by the size of one row.
+    int columns = sizeof(nums[0])/sizeof(nums[0][0]); // Calculate the number of columns: Size of one row divided by the size of one element in a row.
+    printf("Number of rows: %d\n", rows);
+    printf("Number of columns: %d\n", columns);
 
-    nums[0][0] = 1; //start of the first row
-    nums[0][1] = 2; 
+    nums[0][0] = 1; // Initialize elements of the 2D array.
+    nums[0][1] = 2;
     nums[0][2] = 3;
-    nums[0][3] = 4; //start of the second row
+    nums[0][3] = 4;
     nums[1][0] = 5;
     nums[1][1] = 6;
-    nums[1][2] = 7; //start of the third row
+    nums[1][2] = 7;
     nums[1][3] = 8;
 
-    for (int i = 0; i < rows; i++)
+    printf("2D Array 'nums':\n");
+    for (int i = 0; i < rows; i++) // Outer loop iterates through rows.
     {
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < columns; j++) // Inner loop iterates through columns for each row.
         {
-            printf("%d ", nums[i][j]);
+            printf("%d ", nums[i][j]); // Print the element at row 'i' and column 'j', followed by a space.
         }
-        printf("\n");
+        printf("\n"); // After printing all columns in a row, move to the next line.
     }
-    
-    return 0;
 
-//The sizeof calculation in table
+    return 0;
+}
+
+// Example of sizeof calculation for 2D array (moved to be inline with 2D array example for better context):
+/*
+// The sizeof calculation in a 2D array (table)
 int main() {
     int nums[3][3];  // A 3x3 array of integers (like a table)
 
@@ -615,60 +729,74 @@ int main() {
 
     return 0;
 }
-//array of strings
-//like 2D array but its string
-int main()
-{   
-    char yname[25];
-    char names[][10]={"Corley", "", "May", "Jason"};
-    //an string array will look like:{ ?, ?, ?, ?, ?, ?, ?, ?, ?, ? } '?' means uninitialized and we have 10 assigned
-    printf("\nEnter your name:");
-    fgets(yname, 25, stdin);     //use this (insert) might contain blank
-    yname[strlen(yname) - 1] = '\0';
-    //use strNcpy instead of strcpy
-    strncpy(names[1], yname, 9); //only use this to change value stored in the array. Copy up to 9 char
-    names[0][9] = '\0'; //a null terminator which assign the 10th one to be '\0' NOTED: it started from 0
-    //also prevents buffer overflow
+*/
 
-    for (int i = 0; i < sizeof(names)/sizeof(names[0]); i++)
-    //(Total size of the array in bytes) / (Size of one row in bytes)
-    /* 
+// Array of Strings:
+// An array of strings is essentially a 2D array of characters. Each row represents a string.
+#include <stdio.h>
+#include <string.h>
+
+int main_array_strings_example() { // Renamed main
+    char yname[25];
+    char names[][10]={"Corley", "", "May", "Jason"}; // 'names' is an array of strings, each string can be up to 9 characters + null terminator (total 10 bytes).
+    // A string array conceptually looks like: { "Corley", "", "May", "Jason" }. Each string is stored as a char array.
+    // In memory, it's a contiguous block of memory allocated for 4 strings of 10 chars each. Uninitialized parts are not guaranteed to be empty, but often filled with null bytes.
+
+    printf("\nEnter your name: ");
+    fgets(yname, 25, stdin);     // Use fgets for safer input to read strings that might contain spaces. Reads up to 24 characters + null terminator.
+    yname[strcspn(yname, "\n")] = '\0'; // Remove the trailing newline character from fgets input if present.
+    // Use strncpy instead of strcpy to prevent buffer overflows when copying strings into fixed-size buffers.
+    strncpy(names[1], yname, 9); // Copy up to 9 characters from 'yname' to 'names[1]'. Leave space for null terminator.
+    names[1][9] = '\0'; // Manually add a null terminator at the end to ensure 'names[1]' is a valid C string and to prevent buffer overflow if yname was close to 9 chars.
+    // Null terminator is crucial for C-style strings to mark the end of the string.
+
+    printf("List of names:\n");
+    for (int i = 0; i < sizeof(names)/sizeof(names[0]); i++) // Iterate through the array of strings.
+    // (Total size of the 'names' array in bytes) / (Size of one row/string in bytes) = Number of strings in the array.
+    /*
     sizeof(names) would be 40 (4 rows * 10 bytes/row).
-    sizeof(names[0]) would be 10 (10 bytes/row).
-    40 / 10 = 4
+    sizeof(names[0]) would be 10 (10 bytes/row - size of one string).
+    40 / 10 = 4 (number of strings).
     */
-    {   
+    {
         printf("%s\n", names[i]);
     }
-    printf("You are on the list!");
-    return 0;  
+    printf("You are on the list!\n");
+    return 0;
 }
-//swap values of two variables
-int main()
-{   
-    char x[15] = "Ice";     //int x = 4;
-    char y[15] = "Water";   //int y = 6;
-    char temp[15];          //int temp;
 
-    strcpy(temp, x);        //temp = x; temp='' ->(assign x) temp = 4
-    strcpy(x, y);           //x = y;
-    strcpy(y, temp);        //y = temp;
+// Swapping Values of Two Variables:
+#include <stdio.h>
+#include <string.h>
 
-    printf("%s\n", x);
-    printf("%s\n", y);
-    return 0;  
+int main_swap_variables_example() { // Renamed main
+    char x[15] = "Ice";     // Initialize char arrays (strings). Original example used ints, now using strings to demonstrate string swapping.
+    char y[15] = "Water";
+    char temp[15];          // Temporary char array 'temp' for swapping.
+
+    printf("Before swap: x = \"%s\", y = \"%s\"\n", x, y);
+
+    strcpy(temp, x);        // temp = x; Copy the value of 'x' to 'temp'. For strings, use strcpy (or strncpy for safety).
+    strcpy(x, y);           // x = y; Copy the value of 'y' to 'x'.
+    strcpy(y, temp);        // y = temp; Copy the value of 'temp' (original 'x') to 'y'.
+
+    printf("After swap: x = \"%s\", y = \"%s\"\n", x, y);
+    return 0;
 }
-//Bubble sorting, sorting with array 
-//compare the next one(variable) to determine whether to change the value or not
-void sort(int array[], int size) //sorting function
+
+// Bubble Sort: Sorting an Array
+// Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+#include <stdio.h>
+
+void sort(int array[], int size) // Sorting function. Takes an integer array and its size as input.
 {
-    for (int i = 0; i < size -1; i++)   //a nested loop
+    for (int i = 0; i < size -1; i++)   // Outer loop iterates 'size - 1' times.
     {
-        for (int j = 0; j < size -i -1; j++)
+        for (int j = 0; j < size -i -1; j++) // Inner loop iterates through unsorted part of the array. In each pass of outer loop, the largest element bubbles to the end, so we reduce inner loop iterations.
         {
-            if (array[j] > array[j+1])  //ascending for now, change to < for descending
+            if (array[j] > array[j+1])  // Compare adjacent elements. For ascending order, check if array[j] is greater than array[j+1]. Change to '<' for descending order.
             {
-                int temp = array[j];    //change the values
+                int temp = array[j];    // Swap array[j] and array[j+1] if they are in the wrong order.
                 array[j] = array[j+1];
                 array[j+1] = temp;
             }
@@ -676,63 +804,71 @@ void sort(int array[], int size) //sorting function
     }
 }
 
-void printA(int array[], int size) //print function
+void printArray(int array[], int size) // Function to print an array.
 {
+   printf("Sorted array: ");
    for (int i = 0; i < size; i++)
    {
-    printf("%c ", array[i]); //use %c to match ASCII chars
+    printf("%d ", array[i]); // Print each element followed by a space. Use %c if the array is of char type and you want to print characters based on ASCII values.
    }
-    
+   printf("\n");
 }
 
-int main()
-{   
+int main_bubble_sort_example() { // Renamed main
     int array[] = {68, 67, 65, 70, 73, 78, 77, 69, 75, 87};
-  //char arry[] = {'a', 'c', 'b', 'z', 'g'};    //also works with char/strings, need to change the data type tho
-    int size = sizeof(array)/sizeof(array[0]);  //determine the size of the array
+  //char charArray[] = {'d', 'c', 'a', 'f', 'i', 'n', 'm', 'e', 'k', 'w'};    // Also works with char arrays (strings). Need to change data type in sort function and printArray if using char array directly.
+    int size = sizeof(array)/sizeof(array[0]);  // Calculate the size of the array dynamically.
 
-    sort(array, size);
-    printA(array, size);
+    printf("Original array: ");
+    printArray(array, size);
+
+    sort(array, size); // Call the sorting function to sort the array in ascending order.
+
+    printArray(array, size); // Print the sorted array.
     return 0;
 }
 
-//struct is a collection of related variables, like classes
-struct Player
+// Structs (Structures):
+// Structs are user-defined data types that group together variables of different types under a single name. They are like simple classes in other languages (without methods).
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h> // For exit()
+
+struct Player // Define a struct named 'Player'.
 {
-    char name[20];
-    int score;
+    char name[20]; // Member variable: 'name' (char array to store player's name).
+    int score;     // Member variable: 'score' (integer to store player's score).
 };
 
-int main()
-{   
+int main_struct_example() { // Renamed main
     char yname[20];
     int yscore;
-    struct Player player1; //set a class for the player1
-    struct Player player2; //set a class for the player2
+    struct Player player1; // Declare a struct variable 'player1' of type 'Player'. This creates an instance of the Player struct.
+    struct Player player2; // Declare another struct variable 'player2'.
 
-    printf("enter yall name: ");
-    fgets(yname, sizeof(yname), stdin); // Use fgets for safer input
-    yname[strcspn(yname, "\n")] = 0;    // Remove trailing newline if present
+    printf("Enter player name: ");
+    fgets(yname, sizeof(yname), stdin); // Use fgets for safer input of player name.
+    yname[strcspn(yname, "\n")] = 0;    // Remove trailing newline from fgets input.
 
-    printf("scored? how many? ");
-    if (scanf("%d", &yscore) != 1) //if not eqaul to 1 (!=1) then return 1; 
-    {   // Input validation for score
+    printf("Enter player score: ");
+    if (scanf("%d", &yscore) != 1) // Input validation: check if scanf successfully read an integer. scanf returns the number of input items successfully matched and assigned.
+    {   // If scanf did not read one integer (return value is not 1), it's an invalid input.
         printf("Invalid score input. Please enter a number.\n");
-        return 1; // Indicate an error
+        return 1; // Indicate an error by returning a non-zero value from main.
+        // exit(1); // or use exit(1) to terminate the program immediately.
     }
-    // Clear the input buffer in case of invalid input (important after scanf with %d and potential non-numeric input)
-    while (getchar() != '\n'); //clear buffer to prevent buffer overflow
+    // Clear the input buffer in case of invalid input (important after scanf with %d followed by fgets or other input functions).
+    int clear_buffer_char;
+    while ((clear_buffer_char = getchar()) != '\n' && clear_buffer_char != EOF); // Clear buffer to prevent issues in subsequent input operations.
 
-    strcpy (player1.name, yname); //retrieve the name n score from user inputs
-    player1.score = yscore;
+    strcpy (player1.name, yname); // Assign the input name to the 'name' member of 'player1'.
+    player1.score = yscore;       // Assign the input score to the 'score' member of 'player1'.
 
-    strcpy (player2.name, "Hensan"); //specify the values in player2
+    strcpy (player2.name, "Hensan"); // Directly initialize 'player2' members.
     player2.score = 3;
 
-    printf("%s scored \n", player1.name);
-    printf("%d\n", player1.score);
-    printf("%s scored \n", player2.name);
-    printf("%d\n", player2.score);  
+    printf("\nPlayer 1: %s scored %d points.\n", player1.name, player1.score); // Access struct members using the dot operator (.).
+    printf("Player 2: %s scored %d points.\n", player2.name, player2.score);
 
-    return 0;
+    return 0; // Indicate successful program execution.
 }
