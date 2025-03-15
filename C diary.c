@@ -658,3 +658,81 @@ int main()
     printf("%s\n", y);
     return 0;  
 }
+//Bubble sorting, sorting with array 
+//compare the next one(variable) to determine whether to change the value or not
+void sort(int array[], int size) //sorting function
+{
+    for (int i = 0; i < size -1; i++)   //a nested loop
+    {
+        for (int j = 0; j < size -i -1; j++)
+        {
+            if (array[j] > array[j+1])  //ascending for now, change to < for descending
+            {
+                int temp = array[j];    //change the values
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+}
+
+void printA(int array[], int size) //print function
+{
+   for (int i = 0; i < size; i++)
+   {
+    printf("%c ", array[i]); //use %c to match ASCII chars
+   }
+    
+}
+
+int main()
+{   
+    int array[] = {68, 67, 65, 70, 73, 78, 77, 69, 75, 87};
+  //char arry[] = {'a', 'c', 'b', 'z', 'g'};    //also works with char/strings, need to change the data type tho
+    int size = sizeof(array)/sizeof(array[0]);  //determine the size of the array
+
+    sort(array, size);
+    printA(array, size);
+    return 0;
+}
+
+//struct is a collection of related variables, like classes
+struct Player
+{
+    char name[20];
+    int score;
+};
+
+int main()
+{   
+    char yname[20];
+    int yscore;
+    struct Player player1; //set a class for the player1
+    struct Player player2; //set a class for the player2
+
+    printf("enter yall name: ");
+    fgets(yname, sizeof(yname), stdin); // Use fgets for safer input
+    yname[strcspn(yname, "\n")] = 0;    // Remove trailing newline if present
+
+    printf("scored? how many? ");
+    if (scanf("%d", &yscore) != 1) //if not eqaul to 1 (!=1) then return 1; 
+    {   // Input validation for score
+        printf("Invalid score input. Please enter a number.\n");
+        return 1; // Indicate an error
+    }
+    // Clear the input buffer in case of invalid input (important after scanf with %d and potential non-numeric input)
+    while (getchar() != '\n'); //clear buffer to prevent buffer overflow
+
+    strcpy (player1.name, yname); //retrieve the name n score from user inputs
+    player1.score = yscore;
+
+    strcpy (player2.name, "Hensan"); //specify the values in player2
+    player2.score = 3;
+
+    printf("%s scored \n", player1.name);
+    printf("%d\n", player1.score);
+    printf("%s scored \n", player2.name);
+    printf("%d\n", player2.score);  
+
+    return 0;
+}
