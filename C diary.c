@@ -874,3 +874,57 @@ int main_struct_example() { // Renamed main
 
     return 0; // Indicate successful program execution.
 }
+// Typedef for character array:
+// This can be used as a string type for usernames or similar purposes.
+typedef char user[25];
+
+int main()
+{
+    user user1 = "Musk"; // Declare a variable 'user1' of type 'user' (which is char[25]) and initialize it with "Musk".
+    printf("%s", user1);   // Print the string stored in 'user1'
+    return 0;
+}
+// Typedef with struct:
+// Defines a new type 'user' as a struct.
+// This allows us to use 'user' instead of 'struct user' when declaring variables.
+typedef struct
+{
+    char name[20];     // Member variable: 'name' to store the user's name (string)
+    char password[20]; // Member variable password
+    int id;            // Member variable id
+} user;
+
+int main()
+{
+    user user1 = {"Musk", "PasSwORld9032", 341256342}; // Declare and initialize 'user1' of type 'user' struct
+    user user2 = {"MasKi", "PasSword1231", 8964646464};
+
+    printf("Name:%s, Password:%s, ID:%d\n", user1.name, user1.password, user1.id); // Access and print members of 'user1' using dot operator.
+    printf("Name:%s, Password:%s, ID:%d\n", user2.name, user2.password, user2.id);
+    return 0;
+}
+//struct array
+typedef struct
+{
+    char name[20]; // Member variable: 'name' to store the name (string, up to 19 characters + null terminator)
+    float gpa;     
+
+} Score; // 'Score' is now a new type name for this struct
+        // Instead of writing 'struct Score', you can just write 'Score'
+
+int main()
+{
+    Score person1 = {"Casca", 3.4};
+    Score person2 = {"Guts", 4.0};  
+    Score person3 = {"Griffith", 2.3}; 
+	
+    Score people[] = {person1, person2, person3};
+    for (int i = 0; i < sizeof(people) / sizeof(people[0]); i++) 
+    {
+        // 'sizeof(people[0])' gives the size of one 'Score' struct in bytes (which is the size of the first element).
+        // Dividing the total size by the size of one element gives the number of elements in the array.
+        printf("Name:%s\t", people[i].name); // "\t" is for tab
+        printf("GPA:%.2f\n", people[i].gpa);  
+    }
+    return 0;
+}
