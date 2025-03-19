@@ -928,3 +928,22 @@ int main()
     }
     return 0;
 }
+//enum = enumeration
+//help make the program look dope
+enum Day{Sun=1, Mon=2, Tue=3, Wed=4, Thu=5, Fri=6, Sat=7}; //assign the values. NOTE: it all start from 0
+
+int main()
+{  
+    enum Day today = Sun; //enums are not strings, but int
+    if (today == Sun || today == Sat) //more readable
+    {
+        printf("\nWeekend, yeah!!");
+    }
+    else
+    {
+        printf("\nWorking day :(");
+    }
+    
+    
+    return 0;
+}
