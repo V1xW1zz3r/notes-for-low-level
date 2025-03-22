@@ -947,3 +947,50 @@ int main()
     
     return 0;
 }
+//random numbers
+//rand function gives range from 0-32767
+int main()
+{   
+    srand(time(0)); //s for seed rand for number; seed is needed to give random number each round or stay the same
+    int num1 = (rand() % 100) + 1; //generate a random num between 1 and 100 start from 1
+
+    printf("%d is the random number", num1);
+
+    return 0;
+}
+//number guessing game, uses do while to complete it
+int main()
+{   
+    const int MIN = 1; //specify the lowest number
+    const int MAX = 100;
+    int guess;
+    int guesses;
+    int answer;
+
+    srand(time(0)); //uses current time as a seed to generate
+    answer = (rand() % MAX) + MIN; //assign the range
+	
+    do
+    {
+        printf("Enter a number to guess: ");
+        scanf("%d", &guess);
+        if (guess > answer)
+        {
+            printf("too high\n");
+        }
+        else if (guess < answer)
+        {
+            printf("too low\n");
+        }
+        else 
+        {
+            printf("YOU WIN!!\n");
+        }
+        guesses++; //record how many rounds it takes to guess it
+    } while (guess != answer);
+
+    printf("Answer:%d\n", answer);
+    printf("It took you %d guesses to guess it.\n", guesses);
+
+    return 0;
+}
