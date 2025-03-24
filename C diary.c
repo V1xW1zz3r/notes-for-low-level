@@ -994,3 +994,59 @@ int main()
 
     return 0;
 }
+//lil quiz game
+int main()
+{   
+    char questions[][100] = {"Is DOOM doomed?", "For morning routine what should you prepare?", "What tpye of language is the best?"};
+
+    char options[][100] = {"A. Yes", "B. No", "C. Dope ass skeleton", "D. What?", "A. Banana peel", "B. Water", "C. Bowl with ice", "D. Brand new notebook",
+                            "A. C", "B. Rust", "C. Brainfxck", "D. JavaScript"};
+
+    char answers[] ={'C', 'C', 'A'}; // More straightforward for char array
+    int numofqusts = sizeof(questions)/sizeof(questions[0]);
+    int score = 0;
+    char guess;
+
+    for (int i = 0; i < numofqusts; i++)
+    {
+        printf("%s\n", questions[i]);
+
+        for (int j = (i * 4) ; j < (i * 4) + 4 ; j++)
+        {
+            printf("%s\n", options[j]);
+        }
+
+        printf("guess: ");
+        scanf(" %c", &guess); // Use space to consume leading whitespace (including newline)
+        // getchar(); // No longer needed with " %c" in scanf
+        guess = toupper(guess);
+
+        if (guess == answers[i])
+        {
+            printf("EASYY\n");
+            score++;
+        }
+        else
+        {
+            printf("WHAAAA\n");
+        }
+    }
+    printf("%d/%d\n", score, numofqusts);
+    return 0;
+}
+//bitwize operators
+//operators use in bit level programning
+//& = AND
+//| = OR
+//^ = XOR
+//<< left shift
+//>> right shift
+int x = 11; //11 = 00001011
+int y = 31; //31 = 00011111
+int z = 0;  // 0 = 00000000
+
+z = x & y; //-> 00001011 = 11
+z = x | y; //-> 00011111 = 31
+z = x ^ y; //-> 00010100 = 20
+z = x << 1; //-> 00010110 = 22
+z = y >> 2; //-> 00000111 = 7
