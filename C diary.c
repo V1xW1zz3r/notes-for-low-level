@@ -1050,3 +1050,283 @@ z = x | y; //-> 00011111 = 31
 z = x ^ y; //-> 00010100 = 20
 z = x << 1; //-> 00010110 = 22
 z = y >> 2; //-> 00000111 = 7
+//memory addresses
+int main()
+{   //char use up 1 byte, using 1 memory block use up 1 memory address
+    //short use 2 bytes, using 2 memory blocks use up 2 memory addresses
+    //int/float use 4 bytes, using 4 - 4
+    //double use 8 bytes, using 8 - 8
+    char a[3]; //array
+    char b;
+    int c[2]; //array
+
+
+    printf("%d bytes\n", sizeof(a));
+    printf("%d bytes\n", sizeof(b));
+    printf("%d bytes\n", sizeof(c)); 
+
+    printf("%p\n", &a); //%p is looking for where they stored
+    printf("%p\n", &b);
+    printf("%p\n", &c);
+}
+//pointers
+//holds memory address
+int main()
+{   //* = indirectional operator
+    char name[]="Jack";
+    char *pName = name;
+
+    int age = 19;
+    int *pAge = NULL; //better to assign NULL if declaring a pointer
+    pAge = &age;      
+    //int *pAge = &age; //assign the pointer
+
+    printf("Age address: %p\n", &age); //address of the name variable
+    printf("value of pAge: %p\n", pAge); //should be the same as age
+
+    printf("value of age: %d\n", age ); //should be the same as pointer Age
+    printf("vaule at stored address: %d\n", *pAge);
+
+    printf("size of age: %d bytes\n", sizeof(age));
+    printf("size of pAge: %d bytes\n", sizeof(pAge));
+}
+int main()
+{   int b = 3;
+    int * pB = &b; //* pointer to an int, interger pointer named 'pB' is set to the address of b
+    int c = *pB;   //interger named c is set to the thing pointed by pB, in this case set c to b
+
+    printf("%p\n", c);
+    printf("%p\n", pB);
+}
+//writing files  w -write, a -append, r -read
+//-w writing
+int main()
+{   //can write a file in existed file by passing the path or in the same file as the code
+    FILE *pF = fopen("C:\\Users\\*\\*\\.vscode", "w"); //fopen("file.name", "mode");
+    
+    fprintf(pF, "ayee");
+
+    fclose(pF);
+}
+//-a append
+int main()
+{
+    FILE *pF = fopen("test.txt", "a"); //fopen("file.name", "mode");
+    
+    fprintf(pF, "\nHey there this a new line attached by 'a' mode");
+
+    fclose(pF);
+}
+//deleting files just use remove statement
+int main()
+{  
+    if (remove("test.txt")  == 0 )
+    {
+        printf("File Deleted");
+    }
+    else
+    {
+        printf("Failed to delete the file");
+    }
+}
+//-r reading files 
+int main()
+{  
+    FILE *pF = fopen("test.txt", "r");
+    char buffer[255]; //string that holds up 255bytes
+
+    if (pF != 0) //check if the file exists
+    {
+        while (fgets(buffer, 255, pF) != NULL) //check if the line contains anything
+        {
+        printf("%s", buffer); //print the stuff out line by line
+        }   
+    }
+    else
+    {
+        printf("the file does not exist");
+    }
+
+    fclose(pF); //consider a good practice to close it
+    return 0;
+}
+//tic tac toe game
+char board[3][3]; //2d array
+const char Player = 'X';
+const char Computer = 'O';
+void ResetB();
+void PrintB();
+int checkFreeSpaces();
+void PlayerMove();
+void ComputerMove();
+char CheckWinner();
+void PrintWinnter(char);
+
+int main()
+{
+    char winner = ' ';
+    char response;
+
+    do
+    {   
+        winner = ' ';
+        response = ' ';
+        ResetB();//reset board
+        while (winner == ' ' && checkFreeSpaces() != 0)
+        {
+        PrintB();//print board
+
+        PlayerMove();
+        winner = CheckWinner();
+        if (winner != ' ' || checkFreeSpaces() == 0)
+        {
+            break;
+        }
+        ComputerMove();
+        winner = CheckWinner();
+        if (winner != ' ' || checkFreeSpaces() == 0)
+        {
+            break;
+        }
+        }
+        PrintB();
+        PrintWinnter(winner);
+        printf("\nAgain?(Y/N): ");
+        scanf(" %c", &response); 
+        response = toupper(response);
+    } while (response == 'Y');
+    printf("Thx for playing");
+    return 0;
+}
+
+void ResetB()
+{
+    for (int i = 0; i < 3 ; i++) //nested loop, since we have 3x3 just set to i/j < 3
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            board[i][j] = ' '; //set to empty space
+        }
+    }
+}
+void PrintB()
+{
+    printf(" %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
+    printf("\n---|---|---\n");
+    printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
+    printf("\n---|---|---\n");
+    printf(" %c | %c | %c ", board[2][0], board[2][1], board[2][2]);
+    printf("\n");
+}
+int checkFreeSpaces()
+{
+    int freeSpaces = 9;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (board[i][j] != ' ')
+            {
+                freeSpaces--; //if a space is occupied then cut one available on freeSpaces
+            } 
+        } 
+    }
+    return freeSpaces;
+}
+void PlayerMove()
+{
+    int x;
+    int y;
+    do
+    {   printf("Enter row 1-3: ");
+        scanf("%d", &x);
+        x--;
+        printf("Enter column 1-3: ");
+        scanf("%d", &y);
+        y--;
+    
+        if (board[x][y] != ' ')
+        {
+            printf("Space taken\n");
+        }
+        else
+        {
+            board[x][y] = Player;
+            break;
+        }
+    } while (board[x][y] = ' ');
+    
+
+}
+void ComputerMove()
+{
+    //create a seed for randomization
+    srand(time(0));
+    int x;
+    int y;
+
+    if (checkFreeSpaces() > 0 )
+    {
+        do
+        {
+            x = rand() % 3;
+            y = rand() % 3;
+        } while (board[x][y] != ' ');
+
+        board[x][y] = Computer;
+    }
+    else
+    {
+        PrintWinnter(' ');
+    }
+}
+char CheckWinner()
+{
+    //check rows
+    for (int i = 0; i < 3; i++)
+    {
+        if (board[i][0] == board[i][1] && board[i][0] == board[i][2]) //check if the elements are eqaul to each one
+        {
+            return board[i][0];
+        }
+    }
+    //check columns
+    for (int i = 0; i < 3; i++)
+    {
+        if (board[0][i] == board[1][i] && board[0][i] == board[2][i]) //check if the elements are eqaul to each one
+        {
+            return board[0][i];
+        }
+    }
+    //check diagonals
+    for (int i = 0; i < 3; i++)
+    {
+        if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) //check if the elements are eqaul to each one
+        {
+            return board[0][0];
+        }
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        if (board[0][2] == board[1][1] && board[0][2] == board[2][0]) //check if the elements are eqaul to each one
+        {
+            return board[0][2];
+        }
+    }
+    return ' ';
+}
+void PrintWinnter(char winner)
+{
+    if (winner == Player)
+    {
+        printf("YOU WINN");
+    }
+    else if (winner == Computer)
+    {
+        printf("YOU LOSE");
+    }
+    else
+    {
+        printf("DRAW");
+    }
+}
