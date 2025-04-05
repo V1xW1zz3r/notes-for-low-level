@@ -1330,3 +1330,34 @@ void PrintWinnter(char winner)
         printf("DRAW");
     }
 }
+//unions (please don't use it)
+//the combination of struct and enum, it's like A or B "only"
+typedef union AgeOrName //use union to save memory
+{
+    int age;
+    char *name;
+} AorN;
+
+int main()
+{
+    //AorN P1 = {.age = 20}; //You cannot show both age and name from the union in your code
+    AorN P1 = {.name = "Nick"};
+
+    //printf("Age: %d", P1.age);
+    printf("Name: %s", P1.name);
+    return 0;
+}
+//you can store struct in union like this:
+union elements 
+{
+struct
+ {
+    int projectile;
+    int range;
+ } fire;
+struct
+ {
+    int freeze;
+    int range;
+ } ice;
+};
