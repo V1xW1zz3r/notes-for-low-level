@@ -1361,3 +1361,43 @@ struct
     int range;
  } ice;
 };
+//Stack (last in first out structure)
+char name[4] = "Nick";
+printf("'%c', '%c', '%c' ,'%c', '%c'", name[0], name[1], name[2], name[3], name[4]);
+//It returns 'N', 'i', 'c' ,'k', ''
+//assinging a byte to the variable can prevent stack overflow
+//Heap
+int main() {
+    int *ptr;
+    int n = 5;
+
+    // Allocate memory for 5 integers on the heap using malloc()
+    ptr = (int *)malloc(n * sizeof(int));
+
+    if (ptr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1; // Indicate an error
+    }
+
+    printf("Memory allocated successfully using malloc.\n");
+
+    // Initialize the allocated memory
+    for (int i = 0; i < n; i++) {
+        ptr[i] = i * 2; //assigning 0, 2, 4, 6, 8
+    }
+
+    // Print the values
+    printf("Values stored in allocated memory: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", ptr[i]);
+    }
+    printf("\n");
+
+    // Free the allocated memory using free()
+    free(ptr);
+    ptr = NULL; // Good practice to set pointer to NULL after freeing
+
+    printf("Memory freed.\n");
+
+    return 0;
+}
