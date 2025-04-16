@@ -1071,6 +1071,9 @@ int main()
 }
 //pointers
 //holds memory address
+//When used in declaration (int* ptr), it creates a pointer variable.
+//When not used in declaration, it act as a dereference operator.
+//both int* ptr; || int *ptr; works the same
 int main()
 {   //* = indirectional operator
     char name[]="Jack";
@@ -1078,26 +1081,69 @@ int main()
 
     int age = 19;
     int *pAge = NULL; //better to assign NULL if declaring a pointer
-    pAge = &age;      
+    pAge = &age; //Use the & operator to store the memory address of the myAge variable, and assign it to the pointer.
     //int *pAge = &age; //assign the pointer
 
-    printf("Age address: %p\n", &age); //address of the name variable
-    printf("value of pAge: %p\n", pAge); //should be the same as age
+    printf("Age address: %p\n", &age); //memory address of the name variable
+    printf("value of pAge: %p\n", pAge); //memory address for pointer age
 
-    printf("value of age: %d\n", age ); //should be the same as pointer Age
+    printf("value of age: %d\n", age ); //value of age
     printf("vaule at stored address: %d\n", *pAge);
 
     printf("size of age: %d bytes\n", sizeof(age));
     printf("size of pAge: %d bytes\n", sizeof(pAge));
 }
+//pointer to pointer
 int main()
 {   int b = 3;
-    int * pB = &b; //* pointer to an int, interger pointer named 'pB' is set to the address of b
+    int *pB = &b;  //* pointer to an int, interger pointer named 'pB' is set to the address of b
     int c = *pB;   //interger named c is set to the thing pointed by pB, in this case set c to b
 
     printf("%p\n", c);
     printf("%p\n", pB);
 }
+//pointers & array
+//& gets the address of something.
+//* gets the value at an address (held by a pointer).
+//Array names often automatically become the address of the first element (decay).
+int main()
+{   
+    int NumA[] = {39, 41, 87, 429};
+    int *pNumA = NumA;
+    //the size of the NumA is 4(int) and the whole array would be 16(with 4 stored value)
+    for (int i = 0; i < sizeof(NumA)/sizeof(NumA[1]); i++) 
+    {
+        printf("%p\n", &NumA[i]); //print the address of each stored value in array
+    }   
+
+    printf("addr for NumA:%p\n", NumA); //the addr of NumA
+    printf("addr for 1 array element:%p\n", &NumA[0]); //deref the first array addr
+//Values in array
+    int *pNumA = NumA;
+    printf("First value:%d\n", *NumA);
+    //get the val in array by using pointers
+    for (int  i = 0; i < sizeof(NumA)/sizeof(NumA[0]); i++)
+    {
+        printf("val(%d):%d\n", i, *(pNumA + i));
+    }
+//changing values in the array
+    *NumA = 99;
+    *(NumA + 1) = 233;
+    printf("changed vals1:%d, changed val2:%d\n", *(pNumA), *(pNumA + 1));
+    return 0;
+}
+/* NOTE:
+For Arrays:
+int Arr[] = {10, 20};
+int *ptr = Arr; // CORRECT. Arr "decays" to the address of Arr[0].
+// int *ptr = &Arr; // WRONG type. &Arr is type int (*)[2] (pointer to array of 2 ints).
+// int *ptr = &Arr[0]; // ALSO CORRECT, and equivalent to int *ptr = Arr;
+For Single Variables (Non-arrays):
+int Single = 50;
+int *ptrS = &Single; // CORRECT. Need & to get the address of the variable Single.
+// int *ptrS = Single; // WRONG.
+*/
+//---------------------------------------------------
 //writing files  w -write, a -append, r -read
 //-w writing
 int main()
