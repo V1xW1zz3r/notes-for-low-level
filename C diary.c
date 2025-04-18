@@ -1412,38 +1412,128 @@ char name[4] = "Nick";
 printf("'%c', '%c', '%c' ,'%c', '%c'", name[0], name[1], name[2], name[3], name[4]);
 //It returns 'N', 'i', 'c' ,'k', ''
 //assinging a byte to the variable can prevent stack overflow
-//Heap
-int main() {
-    int *ptr;
-    int n = 5;
+//------------------------------------------------------------------------
+//Dynamic Memory Allocations{malloc, calloc, realloc, free}
+//use <stdlib.h>, this type of memory is stored in the heap
+//allocate memory at runtime, giving your program the ability to handle data of varying sizes
+//malloc (memory allocation)
+//syntax: malloc(size); where size is the number of bytes to allocate.
+int main()
+{  
+    int *NumA = NULL; // consider a good practice to make it starts as NULL.
 
-    // Allocate memory for 5 integers on the heap using malloc()
-    ptr = (int *)malloc(n * sizeof(int));
-
-    if (ptr == NULL) {
-        printf("Memory allocation failed!\n");
-        return 1; // Indicate an error
+//assume we need a array to store 5 intergers, each int takes up 4bytes since we need 5 we have to do 4x5bytes
+    NumA = (int *)malloc(sizeof(int) *  5); //malloc(bytes);
+//check if there's memory available
+    if (NumA == NULL)
+    {
+        printf("Failed to allocate memory.\n");
+        return 1;
+    }
+//store values in the array
+    for (int i = 0; i < 5; i++)
+    {
+        NumA[i] = i + 1;
+    }
+//print the values
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d ", NumA[i]);
     }
 
-    printf("Memory allocated successfully using malloc.\n");
-
-    // Initialize the allocated memory
-    for (int i = 0; i < n; i++) {
-        ptr[i] = i * 2; //assigning 0, 2, 4, 6, 8
+    free(NumA); //free the memory
+    NumA = NULL; // Set the pointer to NULL to prevent accidental reuse
+    return 0;
+}
+//calloc
+//syntax: calloc(n, size);
+//n is the number of elements and size is the size of each element in bytes
+//calloc starts with the memory zero-initialized, so you don't have to do anything in advance
+int main()
+{
+//calloc(n, size); in bytes: n * size, in this case 6*4 bytes
+    int *NumA = (int *)calloc(6, sizeof(int));
+//check if there's memory available
+    if (NumA == NULL)
+    {
+        printf("Failed to allocate memory.\n");
+        return 1;
+    }
+//store values in the array
+    for (int i = 0; i < 6; i++)
+    {
+        NumA[i] = i + 1;
+    }
+//print the values
+    for (int i = 0; i < 6; i++)
+    {
+        printf("%d ", NumA[i]);
     }
 
-    // Print the values
-    printf("Values stored in allocated memory: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", ptr[i]);
+    free(NumA); //free the memory
+    NumA = NULL; // Set the pointer to NULL to prevent accidental reuse
+    return 0;
+}
+//realloc
+//resize the previously allocated memory
+//means that you can change the size of existing memory without releasing old memory
+//it also preserve the old elements
+//syntax: realloc(ptr, new_size);
+int main()
+{
+    int *NumA = (int *)calloc(6, sizeof(int));
+//check if there's memory available
+    if (NumA == NULL)
+    {
+        printf("Failed to allocate memory.\n");
+        return 1;
+    }
+//store values in the array
+    printf("the original elemets:\n");
+    for (int i = 0; i < 6; i++)
+    {
+        NumA[i] = i + 1;
+    }
+//print the values
+    for (int i = 0; i < 6; i++)
+    {
+        printf("%d ", NumA[i]);
     }
     printf("\n");
 
-    // Free the allocated memory using free()
-    free(ptr);
-    ptr = NULL; // Good practice to set pointer to NULL after freeing
+//resize the memory to 10 elements
+    int *tmpNumA = (int *)realloc(NumA, 10 * sizeof(int));
+//check if the new memory block assigned
+    if (tmpNumA == NULL)
+    {
+        printf("Failed to reallocate memory.\n");
+        // In case of realloc failure, the original memory is still valid.
+        // We should free it before exiting to prevent a leak.
+        free(NumA);
+        NumA = NULL; // Set original pointer to NULL after freeing
+        return 1;
+    }
+//If realloc succeeded, update the original pointer
+    NumA = tmpNumA;
+//assign new elements in to the new blocks
+    for (int i = 6; i < 10; i++)
+    {
+        NumA[i] = i + 1;
+    }
+//print new values
+    printf("new elements in new blocks:\n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", NumA[i]);
+    }
+    printf("\n");
 
-    printf("Memory freed.\n");
-
+    free(NumA); //free the memory
+    NumA = NULL; // Set the pointer to NULL to prevent accidental reuse
     return 0;
 }
+//free
+//syntax:free(ptr);
+//just release dynamically allocated memory back to the OS
+free(ptr);
+ptr = NULL; //after releasing it's better to set the pointer to NULL
